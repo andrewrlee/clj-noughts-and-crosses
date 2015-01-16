@@ -18,9 +18,9 @@
          row)))
 
 (defn grid->string [grid]
-  (let [divider "\n  ----------- \n"
-        bar     " | "
-        lines (map #(str bar (s/join bar (render-value %)) bar) grid)
+  (let [divider      "\n  ----------- \n"
+        bar          " | "
+        lines        (map #(str bar (s/join bar (render-value %)) bar) grid)
         lines-string (s/join divider lines)] 
     (str divider lines-string divider)))
 
@@ -47,7 +47,7 @@
 
 (defn results [grid] 
   (let [line-wins?    (fn [line sign]  (every? #(= (:sign  %) sign) line))
-        winning-line  (flatten  (filter #(or (line-wins? % "X") (line-wins? % "0")) (get-lines grid)))
+        winning-line  (flatten (filter #(or (line-wins? % "X") (line-wins? % "0")) (get-lines grid)))
         line-indexes  (map :id winning-line)
         winning-sign  (get-in (first winning-line) [:sign])]  
     {:won          (not (nil? winning-sign)) 
@@ -56,7 +56,7 @@
      :grid         (update-grid grid line-indexes [:winning true])})) 
 
 (defn set-grid 
-  ([indexes sign] (set-grid new-grid indexes sign))   
+  ([indexes sign]      (set-grid new-grid indexes sign))   
   ([grid indexes sign] (update-grid grid indexes [:sign sign])))                        
 
 (defn show-grid [grid] 
@@ -66,7 +66,7 @@
 
 (defn invalid-move? 
   [grid n] 
-  (letfn [(is-taken?    [grid n] ((complement nil?) (:sign (get-cell grid n))))
+  (letfn [(is-taken?   [grid n] ((complement nil?) (:sign (get-cell grid n))))
           (is-out-of-range? [n] ((complement contains?) (vec (range 0 9)) n))]
     (or (is-taken? grid n) 
         (is-out-of-range? n))))
