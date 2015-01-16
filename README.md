@@ -1,5 +1,5 @@
 # clj-noughts-and-crosses
-Naughts and Crosses in clojure
+Noughts and Crosses in clojure
 
 Bulld by running the following commands:
 
