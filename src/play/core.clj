@@ -32,8 +32,8 @@
   (let [{:keys [x y]} (coordinates n)] 
     (assoc-in grid [y x k] v)))
 
-(defn update-grid [grid indexes key-value]
-  (reduce (fn [current-grid i] (update-cell current-grid i key-value)) grid indexes))                        
+(defn update-cells [grid indexes [k v]]
+  (reduce (fn [current-grid n] (update-cell current-grid n [k v])) grid indexes))                        
 
 (defn get-cell [grid n]
   (let [{:keys [x y]} (coordinates n)] 
@@ -53,15 +53,15 @@
     {:won          (not (nil? winning-sign)) 
      :winning-row  line-indexes 
      :winning-sign winning-sign
-     :grid         (update-grid grid line-indexes [:winning true])})) 
+     :grid         (update-cells grid line-indexes [:winning true])})) 
 
 (defn set-grid 
   ([indexes sign]      (set-grid new-grid indexes sign))   
-  ([grid indexes sign] (update-grid grid indexes [:sign sign])))                        
+  ([grid indexes sign] (update-cells grid indexes [:sign sign])))                        
 
 (defn show-grid [grid] 
   (let [results (results grid)] 
-    (do (println  (grid->string (:grid results))))
+    (do (println "Here's your board:\n" (grid->string (:grid results))))
         results))
 
 (defn invalid-move? 
@@ -74,7 +74,6 @@
 (defn prompt-move
   [grid sign]
   (let [results (show-grid grid)] 
-    (println "\nHere's your board:")
     (if (:won results) 
         (println "*** " (:winning-sign results) "WINS!! Well done! ***\n\n")
         (do   
