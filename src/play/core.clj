@@ -41,7 +41,7 @@
 
 (defn get-lines [grid] 
   (let [rows      grid
-        cols      (map (fn [col]  (map #(nth % col) rows)) (range 0 3)) 
+        cols      (apply map vector grid) 
         diagonals (map (fn [line] (map #(get-cell grid %) line)) [[0 4 8] [2 4 6]])]
     (concat rows cols diagonals) ))
 
