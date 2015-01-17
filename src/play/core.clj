@@ -52,7 +52,7 @@
     {:winning-sign (get-in (first winning-line) [:sign])
      :grid         (update-cells grid line-indexes [:winning true])})) 
 
-(defn set-grid 
+(defn set-grid  
   ([indexes sign]      (set-grid new-grid indexes sign))   
   ([grid indexes sign] (update-cells grid indexes [:sign sign])))                        
 
@@ -61,15 +61,13 @@
     (do (println "Here's your board:\n" (grid->string (:grid results))))
         results))
 
-(defn invalid-move? 
-  [grid n] 
+(defn invalid-move? [grid n] 
   (letfn [(is-taken?   [grid n] ((complement nil?) (:sign (get-cell grid n))))
           (is-out-of-range? [n] ((complement contains?) (vec (range 0 9)) n))]
     (or (is-taken? grid n) 
         (is-out-of-range? n))))
 
-(defn prompt-move
-  [grid sign]
+(defn prompt-move [grid sign]
   (let [results (show-grid grid)] 
     (if (:winning-sign results) 
         (println "*** " (:winning-sign results) "WINS!! Well done! ***\n\n")
