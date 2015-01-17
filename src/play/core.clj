@@ -48,11 +48,8 @@
 (defn results [grid] 
   (let [line-wins?    (fn [line sign]  (every? #(= (:sign  %) sign) line))
         winning-line  (flatten (filter #(or (line-wins? % "X") (line-wins? % "0")) (get-lines grid)))
-        line-indexes  (map :id winning-line)
-        winning-sign  (get-in (first winning-line) [:sign])]  
-    {:won          (not (nil? winning-sign)) 
-     :winning-row  line-indexes 
-     :winning-sign winning-sign
+        line-indexes  (map :id winning-line)]  
+    {:winning-sign (get-in (first winning-line) [:sign])
      :grid         (update-cells grid line-indexes [:winning true])})) 
 
 (defn set-grid 
@@ -74,7 +71,7 @@
 (defn prompt-move
   [grid sign]
   (let [results (show-grid grid)] 
-    (if (:won results) 
+    (if (:winning-sign results) 
         (println "*** " (:winning-sign results) "WINS!! Well done! ***\n\n")
         (do   
           (println sign ": Where do you want to go? Enter the number: ('q' to quit)")
