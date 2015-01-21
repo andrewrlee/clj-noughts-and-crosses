@@ -1,17 +1,22 @@
 # clj-noughts-and-crosses
 Noughts and Crosses in clojure
 
-Bulld by running the following commands:
+
+Bulld the jar by running the following command:
 
 ```
-  lein clean
-  lein uberjar
+  lein build-jar
 ```
 
 Start the game by running:
 
 ```
-  java -jar target/profile+uberjar/play-0.1.0-SNAPSHOT-standalone.jar
+   java -jar target/uberjar/play-0.1.0-SNAPSHOT-standalone.jar
 ```
 
+Build the game.js file by running:
+
+```
+  lein build-js
+```
 
