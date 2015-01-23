@@ -5270,14 +5270,14 @@ function wf(a, b) {
   return d.toggle("info", Tb.a(Oe, a));
 }
 function xf() {
-  var a = jb(uf), b = tc(a) ? Zc.a(oe, a) : a, c = T.a(b, Le), d = id(c), e = O.c(Ia());
+  var a = jb(uf), b = tc(a) ? Zc.a(oe, a) : a, c = T.a(b, Le);
   se.c(cd.d(function() {
     return function(a, b) {
       a.innerHTML = Ke.a(b, "");
       a.setAttribute("data-index", Ne.c(b));
       return a.classList.toggle("winning", Je.c(b));
     };
-  }(d, e, a, b, c), e, d));
+  }(a, b, c), O.c(Ia()), id(c)));
 }
 function yf(a) {
   He.a(uf, function() {
@@ -5306,27 +5306,29 @@ function Bf(a) {
   yf(Xe.d(Le.c(jb(uf)), new X(null, 1, 5, Z, [a], null), b));
   return zf();
 }
-a: {
-  Af();
-  mf(Ha("reset"), "click", Af);
-  for (var Cf = H(O.c(Ia())), Df = null, Ef = 0, Ff = 0;;) {
-    if (Ff < Ef) {
-      var Gf = Df.G(null, Ff);
-      mf(Gf, "click", Bf);
-      Ff += 1;
-    } else {
-      var Hf = H(Cf);
-      if (Hf) {
-        var If = Hf;
-        if (pc(If)) {
-          var Jf = Db(If), Kf = Eb(If), Lf = Jf, Mf = S(Jf), Cf = Kf, Df = Lf, Ef = Mf
-        } else {
-          Gf = I(If), mf(Gf, "click", Bf), Cf = N(If), Df = null, Ef = 0;
-        }
-        Ff = 0;
+Af();
+mf(Ha("reset"), "click", Af);
+for (var Cf = H(O.c(Ia())), Df = null, Ef = 0, Ff = 0;;) {
+  if (Ff < Ef) {
+    var Gf = Df.G(null, Ff);
+    mf(Gf, "click", Bf);
+    Ff += 1;
+  } else {
+    var Hf = H(Cf);
+    if (Hf) {
+      var If = Hf;
+      if (pc(If)) {
+        var Jf = Db(If), Kf = Eb(If), Lf = Jf, Mf = S(Jf), Cf = Kf, Df = Lf, Ef = Mf
       } else {
-        break a;
+        var Nf = I(If);
+        mf(Nf, "click", Bf);
+        Cf = N(If);
+        Df = null;
+        Ef = 0;
       }
+      Ff = 0;
+    } else {
+      break;
     }
   }
 }

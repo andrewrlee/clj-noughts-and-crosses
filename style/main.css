@@ -4,7 +4,7 @@
   color: #776e65;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 18px;
-  width: 450px;}
+  width: 400px;}
 
 .game-container .grid-container {
   padding: 40px;
@@ -22,8 +22,8 @@
   clear: both; }
 
 .game-container .grid-cell {
-  width: 106.25px;
-  height: 106.25px;
+  width: 90.25px;
+  height: 90.25px;
   margin-right: 15px;
   float: left;
   border-radius: 3px;
