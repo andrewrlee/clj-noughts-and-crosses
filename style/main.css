@@ -1,39 +1,27 @@
-html, body {
-  margin: 0;
-  padding: 0;
+
+.game-container {
   background: #faf8ef;
   color: #776e65;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
-  font-size: 18px; }
+  font-size: 18px;
+  width: 450px;}
 
-body {
-  margin: 80px 0; }
-
-a {
-  color: #776e65;
-  font-weight: bold;
-  text-decoration: underline;
-  cursor: pointer; }
-
-.container {
-  width: 500px;
-  margin: 0 auto; }
-
-.grid-container {
-  position: absolute;
+.game-container .grid-container {
   padding: 40px;
   z-index: 1; }
 
-.grid-row {
+.game-container .grid-row {
   margin-bottom: 15px; }
-.grid-row:last-child {
+
+.game-container .grid-row:last-child {
   margin-bottom: 0; }
-.grid-row:after {
+
+.game-container .grid-row:after {
   content: "";
   display: block;
   clear: both; }
 
-.grid-cell {
+.game-container .grid-cell {
   width: 106.25px;
   height: 106.25px;
   margin-right: 15px;
@@ -48,26 +36,29 @@ a {
   font-weight: bolder;
   cursor: pointer; }
 
-.grid-cell:last-child {
+.game-container .grid-cell:last-child {
   margin-right: 0; }
 
-.grid-row {
+.game-container .grid-row {
   margin-bottom: 10px; }
 
-.grid-row:after {
+.game-container .grid-row:after {
   content: "";
   display: block; }
 
-.restart{
+.game-container .winning{
+  color: #006600; }
+
+.game-container .error{
+  color: #FF0000; }
+
+.game-container .info{
+  color: #006600; }
+
+.game-container .restart {
+  color: #776e65;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer; 
   float: right; }
 
-.winning{
-  color: #006600;
-}
-
-.error{
-  color: #FF0000;
-}
-.info{
-  color: #006600; 
-}
