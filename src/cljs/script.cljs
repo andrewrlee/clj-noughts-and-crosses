@@ -3,8 +3,8 @@
             [goog.events :as events]
             [goog.dom :as dom]))
 
-(def results  (atom {}))
-(def player   (atom (rand-nth ["0" "X"]))) 
+(def state  (atom {}))
+(def player (atom (rand-nth ["0" "X"]))) 
 
 (defn get-cell-elements [] (array-seq  (dom/getElementsByClass "grid-cell"))) 
 
@@ -23,15 +23,14 @@
   (.toggle (.-classList e) "winning" (:winning c)))
 
 (defn render-grid! [{:keys [grid]}] 
-  (let [cells    (flatten grid)
-        elements (get-cell-elements)]
-    (doall (map (fn [elem cell](render-cell-element! elem cell)) 
-                elements cells))))
+  (doall (map #(render-cell-element! %1 %2) 
+              (get-cell-elements) 
+              (flatten grid))))
 
 (defn update-grid! [grid]
-  (swap! results (fn [] (p/results grid)))
-  (render-grid! @results)
-  (if (:winning-sign @results)
+  (swap! state #(p/results grid))
+  (render-grid! @state)
+  (if (:winning-sign @state)
     (show-message! :info "WELL DONE! YOU WON!") 
     (clear-message!)))
 
@@ -40,20 +39,16 @@
 (defn clear-grid! [] (update-grid! p/new-grid))   
 
 (defn perform-move! [event] 
-  (if (:winning-sign @results)
+  (if (:winning-sign @state)
     (show-message! :info "RESTART TO PLAY AGAIN!")
     (let [index  (js/parseInt  (.getAttribute (.-target event) "data-index"))
           player @player]   
-      (if (p/invalid-move? (:grid @results) index)
-        (show-message! :error "BAD MOVE! TRY AGAIN!") 
-        (do (update-grid! (p/set-grid (:grid @results) [index] player))
-            (switch-player!))))))
+      (if (p/invalid-move? (:grid @state) index)
+          (show-message! :error "BAD MOVE! TRY AGAIN!") 
+          (do (update-grid! (p/set-grid (:grid @state) [index] player))
+              (switch-player!))))))
 
-(defn main []
-  (do (clear-grid!)    
-      (events/listen (dom/getElement "reset") "click" clear-grid!)
-      (doseq [element (get-cell-elements)] 
-        (events/listen element  "click" perform-move!))))
-
-(main)
-
+(do (clear-grid!)    
+    (events/listen (dom/getElement "reset") "click" clear-grid!)
+    (doseq [element (get-cell-elements)] 
+      (events/listen element  "click" perform-move!)))
